@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Schere-Stein-Papier Trainer</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>    
+    <body>
+        <div class="container">
+            <h1>Schere-Stein-Papier Trainer</h1>
+            <div class="mode">
+                <button id="control">Kontrollbedingung</button>
+                <button id="cheat">Aktive Schummelbedingung</button>
+            </div>
+            <div class="countdown" id="countdown"></div>
+            <div class="pc-picks">
+                <div class="pick" id="pick1"></div>
+                <div class="pick" id="pick2"></div>
+                <div class="pick" id="pick3"></div>
+            </div>
+            <div class="gamestate">
+                <button id="win">Peters_Win</button>
+                <button id="loss">Peters_Loss</button>
+                <button id="tie">Peters_Tie</button>
+            </div>
+            <div class="cheatpick" id="cheatpick">
+                <button id="rock">Peters_AuswahlStein</button>
+                <button id="scissor">Peters_AuswahlSchere</button>
+                <button id="paper">Peters_AuswahlPaper</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="script.js"></script>
+    </body>
+</html>
