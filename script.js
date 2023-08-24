@@ -1,6 +1,6 @@
 document.getElementById("control").addEventListener("click", controlMode);
 document.getElementById("cheat").addEventListener("click", cheatMode);  
-
+document.getElementById("easy").addEventListener("click", easyMode);  
 
 
 let sideImages = {
@@ -32,8 +32,8 @@ async function controlMode() {
     document.getElementById("pick2").style.backgroundImage = "";
     document.getElementById("pick3").style.backgroundImage = "";
     document.getElementById("cheatpick").style.visibility = "hidden";
-    document.getElementById("tie").style.visibility = "visible";
-    document.getElementById("loss").style.visibility = "visible"; 
+    document.getElementById("gamestate").style.visibility = "visible";
+    document.getElementById("signpick").style.visibility = "hidden";
 
     countdown();
     await delay(6000);
@@ -159,13 +159,136 @@ async function controlMode() {
 
 };
 
+async function easyMode() {
+    document.getElementById("pick1").style.backgroundImage = "";
+    document.getElementById("pick2").style.backgroundImage = "";
+    document.getElementById("pick3").style.backgroundImage = "";
+    document.getElementById("signpick").style.visibility = "visible";
+    document.getElementById("cheatpick").style.visibility = "hidden";
+    document.getElementById("gamestate").style.visibility = "hidden";
+
+    countdown();
+    await delay(6000);
+    // let randomSideImage = sideImages[Math.floor(Math.random() * sideImages.length)];
+    chosenPick1 = randomImage(sideImages);
+    chosenPick2 = randomImage(sideImages);
+    pick1 = document.getElementById("pick1").style.backgroundImage = "url('" + chosenPick1 + "')";
+    pick2 = document.getElementById("pick2").style.backgroundImage = "url('" + chosenPick2 + "')";
+    buttonRockRock = document.getElementById("rockrock");
+    buttonScissorScissor = document.getElementById("scissorscissor");
+    buttonPaperPaper = document.getElementById("paperpaper");
+    buttonRockPaper = document.getElementById("rockpaper");
+    buttonScissorRock = document.getElementById("scissorrock");
+    buttonScissorPaper = document.getElementById("scissorpaper");
+    console.log("Pick1: " + chosenPick1);
+    console.log("Pick2: " + chosenPick2);
+
+    const timeoutDuration = 4000; // Zeit in Millisekunden (hier 3 Sekunden)
+    let timeoutFinished = false;
+    const timeoutPromise = new Promise((resolve) => {
+        setTimeout(() => {
+            if (!timeoutFinished) {
+                document.getElementById("pick1").style.backgroundImage = "";
+                document.getElementById("pick2").style.backgroundImage = "";
+                document.getElementById("countdown").innerHTML = "<h2>ZU LANGSAM!</h2>";
+                resolve(); // Löst das Promise aus, wenn die Zeit abgelaufen ist
+            };
+        }, timeoutDuration);
+    });
+    
+    buttonRockRock.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["rock"] & chosenPick2 == sideImages["rock"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    buttonScissorScissor.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["scissor"] & chosenPick2 == sideImages["scissor"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    buttonPaperPaper.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["paper"] & chosenPick2 == sideImages["paper"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    buttonRockPaper.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["rock"] & chosenPick2 == sideImages["paper"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else if (chosenPick1 == sideImages["paper"] & chosenPick2 == sideImages["rock"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    buttonScissorRock.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["rock"] & chosenPick2 == sideImages["scissor"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else if (chosenPick1 == sideImages["scissor"] & chosenPick2 == sideImages["rock"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    buttonScissorPaper.addEventListener("click", () => {
+        if (chosenPick1 == sideImages["paper"] & chosenPick2 == sideImages["scissor"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else if (chosenPick1 == sideImages["scissor"] & chosenPick2 == sideImages["paper"]) {
+            document.getElementById("countdown").innerHTML = "<h2>Korrekt!</h2>";
+        } else {
+            document.getElementById("countdown").innerHTML = "<h2>FALSCH!</h2>";
+        };
+        document.getElementById("pick1").style.backgroundImage = "";
+        document.getElementById("pick2").style.backgroundImage = "";
+        document.getElementById("pick3").style.backgroundImage = "";
+        timeoutFinished = true;
+    });
+
+    await timeoutPromise; // Warten bis entweder Zeit abgelaufen oder Knopf gedrückt wurde
+
+
+};
+
 async function cheatMode() {
     document.getElementById("pick1").style.backgroundImage = "";
     document.getElementById("pick2").style.backgroundImage = "";
     document.getElementById("pick3").style.backgroundImage = "";
     document.getElementById("cheatpick").style.visibility = "visible";
     document.getElementById("tie").style.visibility = "hidden";
-    document.getElementById("loss").style.visibility = "hidden"; 
+    document.getElementById("loss").style.visibility = "hidden";
+    document.getElementById("win").style.visibility = "visible";
+    document.getElementById("signpick").style.visibility = "hidden";
+ 
 
     countdown();
     await delay(6000);

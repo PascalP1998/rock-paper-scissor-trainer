@@ -19,6 +19,11 @@ body {
     grid-area: cheatpick;
 }
 
+.signpick {
+    visibility: hidden;
+    grid-area: signpick;
+}
+
 .countdown {
     grid-area: countdown;
 }
@@ -36,7 +41,7 @@ body {
     ". mode ."
     ". countdown ."
     ". pc-picks ."
-    "gamestate . cheatpick";
+    "gamestate cheatpick signpick";
     column-gap: 10px;
     row-gap: 15px;
     text-align: center;
