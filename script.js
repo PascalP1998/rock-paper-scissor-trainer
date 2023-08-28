@@ -35,8 +35,8 @@ async function liveMode() {
     document.getElementById("gamestate").style.visibility = "hidden";
     document.getElementById("signpick").style.visibility = "hidden";
 
-    countdown();
-    await delay(6000);
+    //countdown();
+    //await delay(6000);
     // let randomSideImage = sideImages[Math.floor(Math.random() * sideImages.length)];
     chosenPick1 = randomImage(sideImages);
     chosenPick2 = randomImage(sideImages);
