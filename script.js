@@ -1,7 +1,7 @@
 document.getElementById("control").addEventListener("click", controlMode);
 document.getElementById("cheat").addEventListener("click", cheatMode);  
 document.getElementById("easy").addEventListener("click", easyMode);  
-
+document.getElementById("live").addEventListener("click", liveMode); 
 
 let sideImages = {
     "paper": "images/paper_side.JPG",
@@ -25,6 +25,26 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 function randomImage(obj) {
     let keys = Object.keys(obj);
     return obj[keys[ keys.length * Math.random() << 0]];
+};
+
+async function liveMode() {
+    document.getElementById("pick1").style.backgroundImage = "";
+    document.getElementById("pick2").style.backgroundImage = "";
+    document.getElementById("pick3").style.backgroundImage = "";
+    document.getElementById("cheatpick").style.visibility = "hidden";
+    document.getElementById("gamestate").style.visibility = "hidden";
+    document.getElementById("signpick").style.visibility = "hidden";
+
+    countdown();
+    await delay(6000);
+    // let randomSideImage = sideImages[Math.floor(Math.random() * sideImages.length)];
+    chosenPick1 = randomImage(sideImages);
+    chosenPick2 = randomImage(sideImages);
+    pick1 = document.getElementById("pick1").style.backgroundImage = "url('" + chosenPick1 + "')";
+    pick2 = document.getElementById("pick2").style.backgroundImage = "url('" + chosenPick2 + "')";
+    console.log("Pick1: " + chosenPick1);
+    console.log("Pick2: " + chosenPick2);
+
 };
 
 async function controlMode() {
